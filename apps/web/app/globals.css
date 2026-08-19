@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* UI colors - light mode */
+  --ui-bg: #f9fafb;
+  --ui-surface: #ffffff;
+  --ui-surface-muted: #f3f4f6;
+  --ui-border: #e5e7eb;
+  --ui-text: #111827;
+  --ui-text-secondary: #374151;
+  --ui-text-muted: #6b7280;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-ui-bg: var(--ui-bg);
+  --color-ui-surface: var(--ui-surface);
+  --color-ui-surface-muted: var(--ui-surface-muted);
+  --color-ui-border: var(--ui-border);
+  --color-ui-text: var(--ui-text);
+  --color-ui-text-secondary: var(--ui-text-secondary);
+  --color-ui-text-muted: var(--ui-text-muted);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Tailwind dark variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark theme */
+html.dark {
+  --background: #111827;
+  --foreground: #f9fafb;
+
+  --ui-bg: #111827;
+  --ui-surface: #1f2937;
+  --ui-surface-muted: #374151;
+  --ui-border: #374151;
+  --ui-text: #f9fafb;
+  --ui-text-secondary: #d1d5db;
+  --ui-text-muted: #9ca3af;
+}
+
+/* Page background */
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans);
+}

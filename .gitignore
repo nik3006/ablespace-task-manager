@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables / secrets
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Next.js
+.next/
+**/.next/
+out/
+**/out/
+
+# NestJS / TypeScript
+dist/
+**/dist/
+*.tsbuildinfo
+**/*.tsbuildinfo
+
+# Prisma generated client
+apps/api/generated/
+
+# Tests / coverage
+coverage/
+**/coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Docker local override
+docker-compose.override.yml
+
+# Application uploads
+apps/api/uploads/*
+!apps/api/uploads/.gitkeep
+
+# Local authentication/browser data
+cookies.txt
+
+# AI / editor local files
+.agents/
+.claude/
+.windsurf/
+
+**/.agents/
+**/.claude/
+**/.windsurf/

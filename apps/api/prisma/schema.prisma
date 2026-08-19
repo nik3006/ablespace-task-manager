@@ -1,0 +1,187 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id        String   @id @default(uuid())
+  email     String?  @unique
+  fullName  String
+  username  String?  @unique
+  title     String?
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reportedTasks Task[] @relation("TaskReporter")
+  workspaceMemberships WorkspaceMember[]
+  taskMemberships TaskMember[]
+  taskUpdates TaskUpdate[]
+  ledProjects Project[] @relation("ProjectLead")
+}
+
+
+model Workspace {
+  id        String    @id @default(uuid())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  projects  Project[]
+  tasks Task[]
+  labels Label[]
+  members WorkspaceMember[]
+}
+
+
+model Project {
+  id          String       @id @default(uuid())
+  name        String
+  priority    TaskPriority @default(NO_PRIORITY)
+  workspaceId String
+  leadId      String?
+  dueDate     DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id])
+  lead      User?     @relation("ProjectLead", fields: [leadId], references: [id])
+  tasks     Task[]
+}
+
+
+enum TaskStatus {
+  TODO
+  DOING
+  COMPLETED
+  ON_HOLD
+}
+
+enum TaskPriority {
+  NO_PRIORITY
+  URGENT
+  HIGH
+  MEDIUM
+  LOW
+}
+
+model Task {
+  id          String       @id @default(uuid())
+  title       String
+  description String?
+  status      TaskStatus   @default(TODO)
+  priority    TaskPriority @default(NO_PRIORITY)
+
+  projectId   String?
+  workspaceId String
+  reporterId  String?
+
+  dueDate     DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  project     Project?  @relation(fields: [projectId], references: [id])
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  reporter    User?     @relation("TaskReporter", fields: [reporterId], references: [id])
+  subtasks Subtask[]
+  members TaskMember[]
+  updates TaskUpdate[]
+  labels TaskLabel[]
+}
+
+
+model Subtask {
+  id        String       @id @default(uuid())
+  title     String
+  completed Boolean      @default(false)
+  priority  TaskPriority @default(NO_PRIORITY)
+
+  taskId    String
+
+  task      Task         @relation(fields: [taskId], references: [id])
+
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+
+model Label {
+  id          String   @id @default(uuid())
+  name        String
+  color       String
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tasks TaskLabel[]
+}
+
+
+enum WorkspaceRole {
+  OWNER
+  MEMBER
+  GUEST
+}
+
+model WorkspaceMember {
+  id          String        @id @default(uuid())
+  userId      String
+  workspaceId String
+  role        WorkspaceRole @default(MEMBER)
+
+  user        User          @relation(fields: [userId], references: [id])
+  workspace   Workspace     @relation(fields: [workspaceId], references: [id])
+
+  createdAt   DateTime      @default(now())
+
+  @@unique([userId, workspaceId])
+}
+
+
+model TaskMember {
+  id     String @id @default(uuid())
+  taskId String
+  userId String
+
+  task Task @relation(fields: [taskId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([taskId, userId])
+}
+
+
+model TaskUpdate {
+  id        String   @id @default(uuid())
+  content   String
+
+  taskId    String
+  authorId  String
+
+  task      Task     @relation(fields: [taskId], references: [id])
+  author    User     @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+
+model TaskLabel {
+  taskId  String
+  labelId String
+
+  task  Task  @relation(fields: [taskId], references: [id])
+  label Label @relation(fields: [labelId], references: [id])
+
+  @@id([taskId, labelId])
+}
