@@ -82,143 +82,19 @@ export type TaskVisibleFields = {
 const columns: Column[] = [
   {
     title: "To Do",
-    tasks: [
-      {
-        title: "Write API Documentation",
-        assignee: "Admin",
-        dueDate: "29 Jul",
-        labels: [
-          "Deployment",
-          "Deployment",
-        ],
-        priority: "HIGH",
-      },
-      {
-        title: "Implement Search Function",
-        assignee: "Admin",
-        dueDate: "29 Jul",
-        labels: [
-          "Deployment",
-          "Deployment",
-        ],
-        priority: "HIGH",
-      },
-      {
-        title: "Deploy to Production",
-        assignee: "Admin",
-        dueDate: "29 Jul",
-        labels: [
-          "Deployment",
-          "Deployment",
-        ],
-        priority: "URGENT",
-      },
-    ],
+    tasks: [],
   },
-
   {
     title: "Doing",
-    tasks: [
-      {
-        title: "Code Review Completed",
-        assignee: "Admin",
-        dueDate: "29 Jul",
-        labels: [
-          "Deployment",
-          "Deployment",
-        ],
-        priority: "MEDIUM",
-      },
-      {
-        title: "Design Mockups Finalized",
-        assignee: "Admin",
-        dueDate: "29 Jul",
-        labels: [
-          "Deployment",
-          "Deployment",
-        ],
-        priority: "MEDIUM",
-      },
-    ],
+    tasks: [],
   },
-
   {
     title: "Completed",
-    tasks: [
-      {
-        title: "Feature Testing Passed",
-        assignee: "QA Team",
-        dueDate: "30 Jul",
-        labels: [
-          "Testing",
-          "Passed",
-        ],
-        priority: "HIGH",
-      },
-      {
-        title: "UI Design Updated",
-        assignee: "Designer",
-        dueDate: "31 Jul",
-        labels: [
-          "Design",
-          "Updated",
-        ],
-        priority: "MEDIUM",
-      },
-      {
-        title: "Security Audit Scheduled",
-        assignee: "Security",
-        dueDate: "01 Aug",
-        labels: [
-          "Audit",
-          "Scheduled",
-        ],
-        priority: "URGENT",
-      },
-    ],
+    tasks: [],
   },
-
   {
     title: "On Hold",
-    tasks: [
-      {
-        title: "UI Review",
-        assignee: "Designer",
-        dueDate: "01 Aug",
-        labels: [
-          "Design",
-          "Review",
-        ],
-        priority: "LOW",
-      },
-      {
-        title: "Backend Integration",
-        assignee: "Dev Team",
-        dueDate: "02 Aug",
-        labels: [
-          "Development",
-        ],
-        priority: "MEDIUM",
-      },
-      {
-        title: "User Feedback",
-        assignee: "Product",
-        dueDate: "03 Aug",
-        labels: [
-          "Research",
-        ],
-        priority: "LOW",
-      },
-      {
-        title: "Performance Testing",
-        assignee: "Engineering",
-        dueDate: "04 Aug",
-        labels: [
-          "Optimization",
-        ],
-        priority: "LOW",
-      },
-    ],
+    tasks: [],
   },
 ];
 
