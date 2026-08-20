@@ -19,6 +19,10 @@ RUN npm ci
 # Copy only the web application
 COPY apps/web ./apps/web
 
+# Accept build-time API URL
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 # Build Next.js
 RUN npm run build:web
 
