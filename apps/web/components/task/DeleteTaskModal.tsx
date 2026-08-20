@@ -25,7 +25,7 @@ export default function DeleteTaskModal({
       className="
         fixed
         inset-0
-        z-50
+        z-[200]
         flex
         items-center
         justify-center
